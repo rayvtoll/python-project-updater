@@ -1,0 +1,43 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache
+__pycache__
+__pycache__/
+
+# environment
+.env*
+.vscode/
+venv/
+.venv/
+
+# Visual Studio
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+
+# pytest
+.pytest_cache/
+
+# logging
+logs/*
+!logs/.placeholder
+
+# scanners
+.sonar_lock
+report-task.txt
+pylint.txt
+bandit_report.json
+.coverage
+coverage.json
+bandit.*
+update_directories.txt
+
+# podman local
+.local
+.cache
+.bash_history
