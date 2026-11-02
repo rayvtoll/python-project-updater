@@ -73,6 +73,19 @@ def main():
         with open(f"{directory}/requirements.txt", "w") as f:
             f.write(result.stdout)
 
+        # check if requirements.txt has changed and commit if necessary
+        subprocess.run(["git", "-C", directory, "add", "requirements.txt"])
+        if (
+            subprocess.run(
+                ["git", "-C", directory, "diff", "--cached", "--quiet"]
+            ).returncode
+            != 0
+        ):
+            subprocess.run(
+                ["git", "-C", directory, "commit", "-m", "Update requirements.txt"]
+            )
+            subprocess.run(["git", "-C", directory, "push"])
+
 
 if __name__ == "__main__":
     main()
