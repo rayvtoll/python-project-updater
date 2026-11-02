@@ -81,6 +81,7 @@ def main():
             ).returncode
             != 0
         ):
+            logger.info(f"Committing updated requirements.txt in: {directory}")
             subprocess.run(
                 ["git", "-C", directory, "commit", "-m", "Update requirements.txt"]
             )
