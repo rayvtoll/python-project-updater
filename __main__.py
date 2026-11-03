@@ -31,6 +31,11 @@ RUN_GIT_PULL = config("RUN_GIT_PULL", cast=bool, default=True)
 
 def main():
     for directory in UPDATE_DIRECTORIES:
+        requirements_file = f"{directory}/{REQUIREMENTS_FILE}"
+        if not os.path.exists(requirements_file):
+            logger.warning(f"Requirements file not found at: {requirements_file}")
+            continue
+
         logger.info(f"Run git pull on: {directory}")
         subprocess.run(["git", "-C", directory, "checkout", TARGET_BRANCH])
 
@@ -43,11 +48,6 @@ def main():
 
         logger.info(f"Creating new virtual environment at: {venv_path}")
         subprocess.run(["python3.15", "-m", "venv", venv_path])
-
-        requirements_file = f"{directory}/{REQUIREMENTS_FILE}"
-        if not os.path.exists(requirements_file):
-            logger.warning(f"Requirements file not found at: {requirements_file}")
-            continue
 
         logger.info(f"Installing dependencies from: {requirements_file}")
         subprocess.run([f"{venv_path}/bin/pip", "install", "--upgrade", "pip"])
